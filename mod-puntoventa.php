@@ -39,7 +39,7 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="mb-3 row">
-                                    <label for="nombre_puntoventa" class="col-md-2 col-form-label">Punto Venta</label>
+                                    <label for="nombre_puntoventa" class="col-md-2 col-form-label">Puntos Ventas</label>
                                     <div class="col-md-10">
                                         <input class="form-control" type="text" name="nombre_puntoventa" id="nombre_puntoventa" value="<?=$nombre_puntoventa?>">
                                     </div>
