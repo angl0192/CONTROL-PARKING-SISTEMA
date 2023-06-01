@@ -313,7 +313,7 @@
                         if(respuesta == 'SI'){
                             Swal.fire(
                             'Personal',
-                            '¡Se registró con éxito!',
+                            '¡Se actualizó con éxito!',
                             'success'
                             );
                             setTimeout(function(){
