@@ -201,6 +201,50 @@
         $(function(){
             /**************************************************/
             /**************************************************/
+            $(document).on('click', '.borrarReg', function(){
+                var cod_puntoventa = $('.codborrar', this).val();
+                var datosEnviar = {
+                    'cod_puntoventa': cod_puntoventa,
+                    'modulo': "PuntoVenta"
+                }
+                Swal.fire({
+                    title: '¡Eliminar!',
+                    text: "¿Desea eliminar el registro?",
+                    icon: 'error',
+                    showCancelButton: true,
+                    confirmButtonText: 'SÍ',
+                    cancelButtonText: 'CANCELAR'
+                }).then((result) => {
+                    if(result.isConfirmed){
+                        $.ajax({
+                        data: datosEnviar,
+                        url: 'config/proceso-eliminar.php',
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function(datos){
+                            if(datos.respuesta == 'SI'){
+                                Swal.fire(
+                                    '¡Eliminado!',
+                                    'Su registro ha sido eliminado.',
+                                    'success'                                    
+                                );
+                                setTimeout(function(){
+                                location.reload();
+                                }, 3000);
+                            }else{
+                                return false;
+                            }
+                        }
+                    })
+                    }else{
+                        return false;
+                    }
+                    
+                })
+                return false;
+            });
+            /**************************************************/
+            /**************************************************/
             var remoto_href = '';
             jQuery('body').on('click', '[data-bs-toggle="modal"]', function() {
                 if (remoto_href != jQuery(this).data("remote")) {

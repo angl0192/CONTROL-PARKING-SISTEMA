@@ -40,15 +40,10 @@
                                 <div class="card-body">                                   
                                     <div class="row mb-2">
                                         <div class="col-sm-7">
-                                            <h4>Administrar Personal</h4>
+                                            <h4>Clientes</h4>
                                         </div>
                                         <div class="col-sm-5">
                                             <div class="text-sm-end">
-                                                <button type="button" class="btn btn-success waves-effect waves-light mb-2 me-2" data-bs-toggle="modal"
-                                                data-bs-target="#bs-example-modal-xl" data-remote="reg-personal.php" data-sb-backdrop="static" data-sb-keyboard="false">
-                                                    <i class="bx bxs-add-to-queue"></i>
-                                                    NUEVO PERSONAL
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -58,59 +53,58 @@
                                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                         <tr>
-                                            <th>Punto Venta</th>
+                                            <!--<th>N°</th>-->
                                             <th>Nombres</th>
-                                            <th>Apellidos</th>
-                                            <th>Documento</th>
+                                            <th>Tipo Documento</th>
+                                            <th>N° Documento</th>
+                                            <th>Dirección</th>
                                             <th>Email</th>
                                             <th>Teléfono</th>
-                                            <th>Cargo</th>
                                             <th>Estado</th>
                                             <th>Acción</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                                $sqlConsulta = mysqli_query($conexion, "SELECT * FROM personal");
+                                                $sqlConsulta = mysqli_query($conexion, "SELECT * FROM clientes");
                                                 while($fcons = mysqli_fetch_array($sqlConsulta)){
-                                                    $cod_personal = $fcons['cod_personal'];
-                                                    $cod_puntoventa = $fcons['cod_puntoventa'];
-                                                    /****************************************************/
-                                                    $sqlConsultaLoc = mysqli_query($conexion, "SELECT nombre_puntoventa, alias FROM puntos_venta WHERE cod_puntoventa = '$cod_puntoventa'");
-                                                    $fconsuloc = mysqli_fetch_array($sqlConsultaLoc);
-                                                    $nombre_puntoventa = $fconsuloc['nombre_puntoventa'];
-                                                    $alias = $fconsuloc['alias'];
-                                                    /****************************************************/
+                                                    $cod_cliente = $fcons['cod_cliente'];
                                                     $nombres = $fcons['nombres'];
-                                                    $apellidos = $fcons['apellidos'];
+                                                    $cod_tipodoc = $fcons['cod_tipodoc'];
                                                     $num_documento = $fcons['num_documento'];
+                                                    $direccion = $fcons['direccion'];
                                                     $email = $fcons['email'];
                                                     $movil = $fcons['movil'];
-                                                    $cargo = $fcons['cargo'];
+                                                    /*****************************************************************************/
+                                                    $sqlTipoDoc = mysqli_query($conexion, "SELECT * FROM tipos_documentos_identidad WHERE cod_tipodoc = '$cod_tipodoc'");
+                                                    $fdocs = mysqli_fetch_array($sqlTipoDoc);
+                                                    $tipo_documento = $fdocs['descripcion'];
+                                                    /*****************************************************************************/
                                                     if($fcons['estado'] == 'A'){
                                                         $estado = "<div class='badge badge-soft-success font-size-12'>Activo</div>";
                                                     }else{
                                                         $estado = "<div class='badge badge-soft-danger font-size-12'>Inactivo</div>";
                                                     }
+                                                    //$num++;
                                             ?>
                                             <tr>
-                                                <td><?= $nombre_puntoventa ?> <?= $alias ?></td>
+                                                <!--<td><?= $num ?></td>-->
                                                 <td><?= $nombres ?></td>
-                                                <td><?= $apellidos ?></td>
+                                                <td><?= $tipo_documento ?></td>
                                                 <td><?= $num_documento ?></td>
+                                                <td><?= $direccion ?></td>
                                                 <td><?= $email ?></td>
                                                 <td><?= $movil ?></td>
-                                                <td><?= $cargo ?></td>
                                                 <td><?= $estado ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal"
-                                                    data-bs-target="#bs-example-modal-xl" data-remote="mod-personal.php?cod_personal=<?=$cod_personal?>" 
+                                                    data-bs-target="#bs-example-modal-xl" data-remote="mod-clientes.php?cod_cliente=<?=$cod_cliente?>" 
                                                     data-sb-backdrop="static" data-sb-keyboard="false">
                                                         <i class="uil uil-edit-alt"></i>
                                                     </a>
                                                     <a href="#" class="btn btn-danger borrarReg">
                                                         <i class="mdi mdi-delete"></i>
-                                                        <input type="hidden" class="codborrar" name="codborrar" value="<?=$cod_personal?>">
+                                                        <input type="hidden" class="codborrar" name="codborrar" value="<?=$cod_cliente?>">
                                                     </a>
                                                 </td>
                                             </tr> 
@@ -138,7 +132,7 @@
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="myExtraLargeModalLabel">Insertar/Editar Personal</h5>
+                    <h5 class="modal-title" id="myExtraLargeModalLabel">Insertar/Editar Clientes</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -184,10 +178,10 @@
             /**************************************************/
             /**************************************************/
             $(document).on('click', '.borrarReg', function(){
-                var cod_personal = $('.codborrar', this).val();
+                var cod_cliente = $('.codborrar', this).val();
                 var datosEnviar = {
-                    'cod_personal': cod_personal,
-                    'modulo': "Personal"
+                    'cod_cliente': cod_cliente,
+                    'modulo': "Cliente"
                 }
                 Swal.fire({
                     title: '¡Eliminar!',

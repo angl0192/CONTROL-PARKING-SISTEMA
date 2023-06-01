@@ -200,3 +200,174 @@ if($modulo == 'PuntoVenta'){
     $salidaJson = array("respuesta" => $respuesta);
     echo json_encode($salidaJson);
 }
+/***************************************************************/
+/*************************** PERSONAL **************************/
+if($modulo == 'Personal'){
+    $cod_personal = $_POST['cod_personal'];
+    $fecha_creacion = date('Y-m-d H:i:s');
+    $fecha_actualizacion = date('Y-m-d H:i:s');
+    $cod_puntoventa = $_POST['cod_puntoventa'];
+    $nombres = $_POST['nombres'];
+    $apellidos = $_POST['apellidos'];
+    $cod_tipodoc = $_POST['cod_tipodoc'];
+    $num_documento = $_POST['num_documento'];
+    $email = $_POST['email'];
+    $movil = $_POST['movil'];
+    $cargo = $_POST['cargo'];
+    $fecha_ingreso = $_POST['fecha_ingreso'];
+    $imagen = $_POST['imagen'];
+    $usuario = sha1($_POST['usuario']);
+    $clave = sha1($_POST['clave']);
+    $estado = $_POST['estado'];
+    $proceso = $_POST['proceso'];
+
+    if($proceso == 'RegistrarPersonal'){
+        $sqlVerificar = mysqli_query($conexion, "SELECT cod_personal FROM personal WHERE num_documento = '$num_documento'");
+        $numVer = mysqli_num_rows($sqlVerificar);
+        if($numVer == 0){
+            $sqlInsertar = mysqli_query($conexion, "INSERT INTO personal (
+                fecha_creacion,
+                fecha_actualizacion,
+                cod_puntoventa,
+                nombres,
+                apellidos,
+                cod_tipodoc,
+                num_documento,
+                email,
+                movil,
+                cargo,
+                fecha_ingreso,
+                imagen,
+                usuario,
+                clave,
+                estado)VALUES(
+                '$fecha_creacion',
+                '$fecha_actualizacion',
+                '$cod_puntoventa',
+                '$nombres',
+                '$apellidos',
+                '$cod_tipodoc',
+                '$num_documento',
+                '$email',
+                '$movil',
+                '$cargo',
+                '$fecha_ingreso',
+                '$imagen',
+                '$usuario',
+                '$clave',
+                '$estado')");
+            $respuesta = "SI";
+        }else{
+            $respuesta = "NO";
+        }
+    }
+
+    if($proceso == 'ActualizarPersonal'){
+        if($usuario == '' AND $clave == ''){
+            $sqlActualizar = mysqli_query($conexion, "UPDATE personal SET
+            cod_personal = '$cod_personal',
+            fecha_actualizacion = '$fecha_actualizacion',
+            cod_puntoventa = '$cod_puntoventa',
+            nombres = '$nombres',
+            apellidos = '$apellidos',
+            cod_tipodoc = '$cod_tipodoc',
+            num_documento = '$num_documento',
+            email = '$email',
+            movil = '$movil',
+            cargo = '$cargo',
+            fecha_ingreso = '$fecha_ingreso',
+            imagen = '$imagen',
+            estado = '$estado' WHERE cod_personal = '$cod_personal'");
+            $respuesta = 'SI';
+        }
+        if($usuario != '' AND $clave != ''){
+            $sqlActualizar = mysqli_query($conexion, "UPDATE personal SET
+            cod_personal = '$cod_personal',
+            fecha_actualizacion = '$fecha_actualizacion',
+            cod_puntoventa = '$cod_puntoventa',
+            nombres = '$nombres',
+            apellidos = '$apellidos',
+            cod_tipodoc = '$cod_tipodoc',
+            num_documento = '$num_documento',
+            email = '$email',
+            movil = '$movil',
+            cargo = '$cargo',
+            fecha_ingreso = '$fecha_ingreso',
+            imagen = '$imagen',
+            usuario = '$usuario',
+            clave = '$clave',
+            estado = '$estado' WHERE cod_personal = '$cod_personal'");
+            $respuesta = 'SI';
+        }
+        if($usuario != '' AND $clave == ''){
+            $sqlActualizar = mysqli_query($conexion, "UPDATE personal SET
+            cod_personal = '$cod_personal',
+            fecha_actualizacion = '$fecha_actualizacion',
+            cod_puntoventa = '$cod_puntoventa',
+            nombres = '$nombres',
+            apellidos = '$apellidos',
+            cod_tipodoc = '$cod_tipodoc',
+            num_documento = '$num_documento',
+            email = '$email',
+            movil = '$movil',
+            cargo = '$cargo',
+            fecha_ingreso = '$fecha_ingreso',
+            imagen = '$imagen',
+            usuario = '$usuario',
+            estado = '$estado' WHERE cod_personal = '$cod_personal'");
+            $respuesta = 'SI';
+        }
+        if($usuario == '' AND $clave != ''){
+            $sqlActualizar = mysqli_query($conexion, "UPDATE personal SET
+            cod_personal = '$cod_personal',
+            fecha_actualizacion = '$fecha_actualizacion',
+            cod_puntoventa = '$cod_puntoventa',
+            nombres = '$nombres',
+            apellidos = '$apellidos',
+            cod_tipodoc = '$cod_tipodoc',
+            num_documento = '$num_documento',
+            email = '$email',
+            movil = '$movil',
+            cargo = '$cargo',
+            fecha_ingreso = '$fecha_ingreso',
+            imagen = '$imagen',
+            clave = '$clave',
+            estado = '$estado' WHERE cod_personal = '$cod_personal'");
+            $respuesta = 'SI';
+        }
+    }
+    $salidaJson = array("respuesta" => $respuesta);
+    echo json_encode($salidaJson);
+}
+/***************************************************************/
+/*************************** CLIENTES **************************/
+if($modulo == 'Clientes'){
+    $cod_cliente = $_POST['cod_cliente'];
+    $fecha_actualizacion = date('Y-m-d H:i:s');
+    $cod_personal = $xCodPer;
+    $nombres = $_POST['nombres'];
+    $cod_tipodoc = $_POST['cod_tipodoc'];
+    $num_documento = $_POST['num_documento'];
+    $direccion = $_POST['direccion'];
+    $movil = $_POST['movil'];
+    $email = $_POST['email'];
+    $estado = $_POST['estado'];
+    $proceso = $_POST['proceso'];
+
+    if($proceso == 'ActualizarCliente'){
+        $sqlActualizar = mysqli_query($conexion, "UPDATE clientes SET
+        cod_cliente = '$cod_cliente',
+        fecha_actualizacion = '$fecha_actualizacion',
+        cod_personal = '$cod_personal',
+        nombres = '$nombres',
+        cod_tipodoc = '$cod_tipodoc',
+        num_documento = '$num_documento',
+        direccion = '$direccion',
+        movil = '$movil',
+        email = '$email',
+        estado = '$estado' WHERE cod_cliente = '$cod_cliente'");
+        $respuesta = 'SI';        
+    }
+    $salidaJson = array("respuesta" => $respuesta);
+    echo json_encode($salidaJson);
+}
