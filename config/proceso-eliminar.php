@@ -35,3 +35,24 @@ if($modulo == 'Cliente'){
     $salidaJson = array("respuesta" => $respuesta);
     echo json_encode($salidaJson);
 }
+/***************************************************************/
+/************************** SERVICIO ***************************/
+if($modulo == 'Servicios'){
+    $cod_servicio = $_POST['cod_servicio'];
+    $sqlEliminar = mysqli_query($conexion, "DELETE FROM servicios WHERE cod_servicio = '$cod_servicio'");
+    $respuesta = "SI";
+    /**********************************************/
+    $salidaJson = array("respuesta" => $respuesta);
+    echo json_encode($salidaJson);
+}
+//Estacionamientos
+/***************************************************************/
+/********************* ESTACIONAMIENTOS ************************/
+if($modulo == 'Estacionamientos'){
+    $cod_estacionamiento = $_POST['cod_estacionamiento'];
+    $sqlEliminar = mysqli_query($conexion, "DELETE FROM estacionamientos WHERE cod_estacionamiento = '$cod_estacionamiento'");
+    $respuesta = "SI";
+    /**********************************************/
+    $salidaJson = array("respuesta" => $respuesta);
+    echo json_encode($salidaJson);
+}

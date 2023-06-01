@@ -371,3 +371,98 @@ if($modulo == 'Clientes'){
     $salidaJson = array("respuesta" => $respuesta);
     echo json_encode($salidaJson);
 }
+/***************************************************************/
+/************************** SERVICIOS **************************/
+if($modulo == 'Servicios'){
+    $cod_servicio = $_POST['cod_servicio'];
+    $fecha_creacion = date('Y-m-d H:i:s');
+    $fecha_actualizacion = date('Y-m-d H:i:s');
+    $cod_personal = $xCodPer;
+    $cod_puntoventa = $_POST['cod_puntoventa'];
+    $descripcion = $_POST['descripcion'];
+    $costo = $_POST['costo'];
+    $estado = $_POST['estado'];
+    $proceso = $_POST['proceso'];
+
+    if($proceso == 'RegistrarServicios'){
+        $sqlVerificar = mysqli_query($conexion, "SELECT cod_servicio FROM servicios WHERE nombre_servicio = '$nombre_servicio'");
+        $numVer = mysqli_num_rows($sqlVerificar);
+        if($numVer == 0){
+            $sqlInsertar = mysqli_query($conexion, "INSERT INTO servicios (
+                fecha_creacion,
+                fecha_actualizacion,
+                cod_personal,
+                nombre_servicio,
+                descripcion,
+                costo,
+                estado)VALUES(
+                '$fecha_creacion',
+                '$fecha_actualizacion',
+                '$cod_personal',
+                '$nombre_servicio',
+                '$descripcion',
+                '$costo',
+                '$estado')");
+            $respuesta = "SI";
+        }else{
+            $respuesta = "NO";
+        }
+    }
+    if($proceso == 'ActualizarServicios'){
+        $sqlActualizar = mysqli_query($conexion, "UPDATE servicios SET
+        cod_servicio = '$cod_servicio',
+        fecha_actualizacion = '$fecha_actualizacion',
+        cod_personal = '$cod_personal',
+        nombre_servicio = '$nombre_servicio',
+        descripcion = '$descripcion',
+        costo = '$costo',
+        estado = '$estado' WHERE cod_servicio = '$cod_servicio'");
+        $respuesta = 'SI';
+    }
+    $salidaJson = array("respuesta" => $respuesta);
+    echo json_encode($salidaJson);
+}
+/***************************************************************/
+/*********************** ESTACIONAMIENTOS **********************/
+if($modulo == 'Estacionamientos'){
+    $cod_estacionamiento = $_POST['cod_estacionamiento'];
+    $cod_puntoventa = $_POST['cod_puntoventa'];
+    $cod_personal = $xCodPer;
+    $nivel = $_POST['nivel'];
+    $numeracion = $_POST['numeracion'];
+    $estado = $_POST['estado'];
+    $proceso = $_POST['proceso'];
+
+    if($proceso == 'RegistrarEstacionamientos'){
+        $sqlVerificar = mysqli_query($conexion, "SELECT cod_estacionamiento FROM estacionamientos WHERE numeracion = '$numeracion' AND cod_puntoventa = '$cod_puntoventa'");
+        $numVer = mysqli_num_rows($sqlVerificar);
+        if($numVer == 0){
+            $sqlInsertar = mysqli_query($conexion, "INSERT INTO estacionamientos (
+                cod_puntoventa,
+                cod_personal,
+                nivel,
+                numeracion,
+                estado)VALUES(
+                '$cod_puntoventa',
+                '$cod_personal',
+                '$nivel',
+                '$numeracion',
+                '$estado')");
+            $respuesta = "SI";
+        }else{
+            $respuesta = "NO";
+        }
+    }
+    if($proceso == 'ActualizarEstacionamientos'){
+        $sqlActualizar = mysqli_query($conexion, "UPDATE estacionamientos SET
+        cod_estacionamiento = '$cod_estacionamiento',
+        cod_puntoventa = '$cod_puntoventa',
+        cod_personal = '$cod_personal',
+        nivel = '$nivel',
+        numeracion = '$numeracion',
+        estado = '$estado' WHERE cod_servicio = '$cod_servicio'");
+        $respuesta = 'SI';
+    }
+    $salidaJson = array("respuesta" => $respuesta);
+    echo json_encode($salidaJson);
+}

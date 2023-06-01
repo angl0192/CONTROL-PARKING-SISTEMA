@@ -51,8 +51,8 @@
                         <span class="menu-item" data-key="t-ecommerce">Parqueo</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="estacionamientos.php" data-key="t-estacionamientos">Estacionamientos</a></li>
                         <li><a href="ingreso.php" data-key="t-ingreso">Ingreso</a></li>
-                        <li><a href="cobros.php" data-key="t-cobro">Cobros</a></li>
                         <li><a href="salida.php" data-key="t-salida">Salida</a></li>
                     </ul>
                 </li>
