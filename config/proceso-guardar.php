@@ -379,6 +379,7 @@ if($modulo == 'Servicios'){
     $fecha_actualizacion = date('Y-m-d H:i:s');
     $cod_personal = $xCodPer;
     $cod_puntoventa = $_POST['cod_puntoventa'];
+    $nombre_servicio = $_POST['nombre_servicio'];
     $descripcion = $_POST['descripcion'];
     $costo = $_POST['costo'];
     $estado = $_POST['estado'];
@@ -428,7 +429,7 @@ if($modulo == 'Estacionamientos'){
     $cod_estacionamiento = $_POST['cod_estacionamiento'];
     $cod_puntoventa = $_POST['cod_puntoventa'];
     $cod_personal = $xCodPer;
-    $nivel = $_POST['nivel'];
+    $cod_nivel = $_POST['cod_nivel'];
     $numeracion = $_POST['numeracion'];
     $estado = $_POST['estado'];
     $proceso = $_POST['proceso'];
@@ -440,12 +441,12 @@ if($modulo == 'Estacionamientos'){
             $sqlInsertar = mysqli_query($conexion, "INSERT INTO estacionamientos (
                 cod_puntoventa,
                 cod_personal,
-                nivel,
+                cod_nivel,
                 numeracion,
                 estado)VALUES(
                 '$cod_puntoventa',
                 '$cod_personal',
-                '$nivel',
+                '$cod_nivel',
                 '$numeracion',
                 '$estado')");
             $respuesta = "SI";
@@ -458,9 +459,9 @@ if($modulo == 'Estacionamientos'){
         cod_estacionamiento = '$cod_estacionamiento',
         cod_puntoventa = '$cod_puntoventa',
         cod_personal = '$cod_personal',
-        nivel = '$nivel',
+        cod_nivel = '$cod_nivel',
         numeracion = '$numeracion',
-        estado = '$estado' WHERE cod_servicio = '$cod_servicio'");
+        estado = '$estado' WHERE cod_estacionamiento = '$cod_estacionamiento'");
         $respuesta = 'SI';
     }
     $salidaJson = array("respuesta" => $respuesta);

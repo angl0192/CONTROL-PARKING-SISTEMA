@@ -27,12 +27,12 @@
                                         <select class="form-select" name="cod_puntoventa" id="cod_puntoventa">
                                             <option value="0">Seleccionar Punto Venta</option>
                                             <?php                                                                
-                                                    $sqlPuntosVenta = mysqli_query($conexion, "SELECT * FROM puntos_venta");
-                                                    while($fpuntv = mysqli_fetch_array($sqlPuntosVenta)){
-                                                        $cod_puntoventa = $fpuntv['cod_puntoventa'];
-                                                        $nombre_puntoventa = $fpuntv['nombre_puntoventa'];
-                                                        echo "<option value='$cod_puntoventa'>$nombre_puntoventa</option>";
-                                                    }
+                                                $sqlPuntosVenta = mysqli_query($conexion, "SELECT * FROM puntos_venta");
+                                                while($fpuntv = mysqli_fetch_array($sqlPuntosVenta)){
+                                                    $cod_puntoventa = $fpuntv['cod_puntoventa'];
+                                                    $nombre_puntoventa = $fpuntv['nombre_puntoventa'];
+                                                    echo "<option value='$cod_puntoventa'>$nombre_puntoventa</option>";
+                                                }
                                             ?>
                                         </select>
                                     </div>
@@ -40,11 +40,16 @@
                                 <div class="row mb-3">
                                     <label class="col-md-2 col-form-label">Nivel</label>
                                     <div class="col-md-10">
-                                        <select class="form-select" name="nivel" id="nivel">
+                                        <select class="form-select" name="cod_nivel" id="cod_nivel">
                                             <option value="0">Seleccionar nivel</option>
-                                            <option value="Primer Nivel">Primer Nivel</option>
-                                            <option value="Segundo Nivel">Segundo Nivel</option>
-                                            <option value="Tercer Nivel">Tercer Nivel</option>
+                                            <?php                                                                
+                                                $sqlNiveles = mysqli_query($conexion, "SELECT * FROM nivel");
+                                                while($fnivel = mysqli_fetch_array($sqlNiveles)){
+                                                    $cod_nivel = $fnivel['cod_nivel'];
+                                                    $nivel = $fnivel['nivel'];
+                                                    echo "<option value='$cod_nivel'>$nivel</option>";
+                                                }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>

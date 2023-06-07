@@ -54,6 +54,7 @@
                         <li><a href="estacionamientos.php" data-key="t-estacionamientos">Estacionamientos</a></li>
                         <li><a href="ingreso.php" data-key="t-ingreso">Ingreso</a></li>
                         <li><a href="salida.php" data-key="t-salida">Salida</a></li>
+                        <li><a href="abonados.php" data-key="t-abonados">Abonados</a></li>
                     </ul>
                 </li>
                 <li>

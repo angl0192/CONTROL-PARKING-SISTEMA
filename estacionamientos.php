@@ -47,7 +47,7 @@
                                                 <button type="button" class="btn btn-success waves-effect waves-light mb-2 me-2" data-bs-toggle="modal"
                                                 data-bs-target="#bs-example-modal-xl" data-remote="reg-estacionamiento.php" data-sb-backdrop="static" data-sb-keyboard="false">
                                                     <i class="bx bxs-add-to-queue"></i>
-                                                    NUEVA COCHERA
+                                                    NUEVO ESTACIONAMIENTO
                                                 </button>
                                             </div>
                                         </div>
@@ -71,23 +71,28 @@
                                                 while($fcons = mysqli_fetch_array($sqlConsulta)){
                                                     $cod_estacionamiento = $fcons['cod_estacionamiento'];
                                                     $cod_puntoventa = $fcons['cod_puntoventa'];
-                                                    $nivel = $fcons['nivel'];
+                                                    $cod_nivel = $fcons['cod_nivel'];
                                                     $numeracion = $fcons['numeracion'];
-                                                    if($fcons['estado'] == 'A'){
-                                                        $estado = "<div class='badge badge-soft-success font-size-12'>Activo</div>";
+                                                    if($fcons['estado'] == 'Ocupado'){
+                                                        $estado = "<div class='badge badge-soft-danger font-size-12'>No Disponible</div>";
                                                     }else{
-                                                        $estado = "<div class='badge badge-soft-danger font-size-12'>Inactivo</div>";
+                                                        $estado = "<div class='badge badge-soft-success font-size-12'>Disponible</div>";
                                                     }
                                                     /******************************************************************************************/
                                                     $sqlPuntoVenta = mysqli_query($conexion, "SELECT * FROM puntos_venta WHERE cod_puntoventa = '$cod_puntoventa'");
                                                     $fcons = mysqli_fetch_array($sqlPuntoVenta);
                                                     $nombre_puntoventa = $fcons['nombre_puntoventa'];
                                                     /******************************************************************************************/
+                                                    $sqlNiveles = mysqli_query($conexion, "SELECT * FROM nivel WHERE cod_nivel = '$cod_nivel'");
+                                                    $fnivel = mysqli_fetch_array($sqlNiveles);
+                                                        $cod_nivel = $fnivel['cod_nivel'];
+                                                        $nivel = $fnivel['nivel'];
+                                                    /******************************************************************************************/
                                             ?>
                                             <tr>
                                                 <td><?= $nombre_puntoventa ?></td>
                                                 <td><?= $nivel ?></td>
-                                                <td><?= $numeracion ?></td>
+                                                <td>Estacionamiento <?= $numeracion ?></td>
                                                 <td><?= $estado ?></td>
                                                 <td>
                                                     <a href="#" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal"
