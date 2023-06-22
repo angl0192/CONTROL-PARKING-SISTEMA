@@ -16,7 +16,6 @@
     $fecha_ingreso = $fconsulta['fecha_ingreso'];
     $imagen = $fconsulta['imagen'];
     $usuario = $fconsulta['usuario'];
-    $clave = $fconsulta['clave'];
     $estado = $fconsulta['estado'];
 ?>
 <!doctype html>

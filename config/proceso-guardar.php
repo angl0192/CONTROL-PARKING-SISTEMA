@@ -216,6 +216,8 @@ if($modulo == 'Personal'){
     $cargo = $_POST['cargo'];
     $fecha_ingreso = $_POST['fecha_ingreso'];
     $imagen = $_POST['imagen'];
+    $user = $_POST['usuario'];
+    $pass = $_POST['clave'];
     $usuario = sha1($_POST['usuario']);
     $clave = sha1($_POST['clave']);
     $estado = $_POST['estado'];
@@ -263,7 +265,7 @@ if($modulo == 'Personal'){
     }
 
     if($proceso == 'ActualizarPersonal'){
-        if($usuario == '' AND $clave == ''){
+        if($user == '' AND $pass == ''){
             $sqlActualizar = mysqli_query($conexion, "UPDATE personal SET
             cod_personal = '$cod_personal',
             fecha_actualizacion = '$fecha_actualizacion',
@@ -280,7 +282,7 @@ if($modulo == 'Personal'){
             estado = '$estado' WHERE cod_personal = '$cod_personal'");
             $respuesta = 'SI';
         }
-        if($usuario != '' AND $clave != ''){
+        if($user != '' AND $pass != ''){
             $sqlActualizar = mysqli_query($conexion, "UPDATE personal SET
             cod_personal = '$cod_personal',
             fecha_actualizacion = '$fecha_actualizacion',
@@ -299,7 +301,7 @@ if($modulo == 'Personal'){
             estado = '$estado' WHERE cod_personal = '$cod_personal'");
             $respuesta = 'SI';
         }
-        if($usuario != '' AND $clave == ''){
+        if($user != '' AND $pass == ''){
             $sqlActualizar = mysqli_query($conexion, "UPDATE personal SET
             cod_personal = '$cod_personal',
             fecha_actualizacion = '$fecha_actualizacion',
@@ -317,7 +319,7 @@ if($modulo == 'Personal'){
             estado = '$estado' WHERE cod_personal = '$cod_personal'");
             $respuesta = 'SI';
         }
-        if($usuario == '' AND $clave != ''){
+        if($user == '' AND $pass != ''){
             $sqlActualizar = mysqli_query($conexion, "UPDATE personal SET
             cod_personal = '$cod_personal',
             fecha_actualizacion = '$fecha_actualizacion',
@@ -435,7 +437,8 @@ if($modulo == 'Estacionamientos'){
     $proceso = $_POST['proceso'];
 
     if($proceso == 'RegistrarEstacionamientos'){
-        $sqlVerificar = mysqli_query($conexion, "SELECT cod_estacionamiento FROM estacionamientos WHERE numeracion = '$numeracion' AND cod_puntoventa = '$cod_puntoventa'");
+        $sqlVerificar = mysqli_query($conexion, "SELECT cod_estacionamiento FROM estacionamientos WHERE numeracion = '$numeracion' AND cod_puntoventa = '$cod_puntoventa'
+                                        AND cod_nivel = '$cod_nivel'");
         $numVer = mysqli_num_rows($sqlVerificar);
         if($numVer == 0){
             $sqlInsertar = mysqli_query($conexion, "INSERT INTO estacionamientos (

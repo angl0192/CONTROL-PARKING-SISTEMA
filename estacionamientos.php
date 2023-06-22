@@ -73,10 +73,11 @@
                                                     $cod_puntoventa = $fcons['cod_puntoventa'];
                                                     $cod_nivel = $fcons['cod_nivel'];
                                                     $numeracion = $fcons['numeracion'];
-                                                    if($fcons['estado'] == 'Ocupado'){
-                                                        $estado = "<div class='badge badge-soft-danger font-size-12'>No Disponible</div>";
+                                                    $est = $fcons['estado'];
+                                                    if($est == 'Ocupado'){
+                                                        $estado = '<span class="badge badge-soft-danger">Ocupado</span>';
                                                     }else{
-                                                        $estado = "<div class='badge badge-soft-success font-size-12'>Disponible</div>";
+                                                        $estado = '<span class="badge badge-soft-success">Libre</span>';
                                                     }
                                                     /******************************************************************************************/
                                                     $sqlPuntoVenta = mysqli_query($conexion, "SELECT * FROM puntos_venta WHERE cod_puntoventa = '$cod_puntoventa'");
@@ -85,8 +86,7 @@
                                                     /******************************************************************************************/
                                                     $sqlNiveles = mysqli_query($conexion, "SELECT * FROM nivel WHERE cod_nivel = '$cod_nivel'");
                                                     $fnivel = mysqli_fetch_array($sqlNiveles);
-                                                        $cod_nivel = $fnivel['cod_nivel'];
-                                                        $nivel = $fnivel['nivel'];
+                                                    $nivel = $fnivel['nivel'];
                                                     /******************************************************************************************/
                                             ?>
                                             <tr>

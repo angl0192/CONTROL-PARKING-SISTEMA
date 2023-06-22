@@ -183,6 +183,42 @@
   --bs-input-check-border: #353556;
 }
 /*******************************************************/
+/*************************RELOJ*************************/
+.reloj {
+  color: #fff;
+  font-size: 120px;
+  font-family: 'DS-Digital', sans-serif;
+  letter-spacing: 5px;
+  text-align: center;
+  background-color: #DD2727;  
+  border-radius: 20px;
+}
+
+@media only screen and (min-width: 200px) {
+  .reloj {
+    color: #fff;
+    font-size: 50px;
+    font-family: 'DS-Digital', sans-serif;
+    letter-spacing: 5px;
+    text-align: center;
+    background-color: #DD2727;    
+    border-radius: 20px;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .reloj {
+    color: #fff;
+    font-size: 120px;
+    font-family: 'DS-Digital', sans-serif;
+    letter-spacing: 5px;
+    text-align: center;
+    background-color: #DD2727;    
+    border-radius: 20px;
+  }
+}
+
+/*******************************************************/
 .alerta {
   color: red;
   font-weight: 600;

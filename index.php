@@ -10,10 +10,8 @@
 ?>
 <!doctype html>
 <html lang="es">
-    <head>
-        
+    <head>        
         <?php require("config/header-web.php"); ?>
-
     </head>
 
     <body class="bg-white">
@@ -21,17 +19,14 @@
         <div class="auth-page d-flex align-items-center min-vh-100">
             <div class="container-fluid p-0">
                 <div class="row g-0">
-                    <div class="col-xxl-3 col-lg-4 col-md-5 my-auto">
-                            <div class="d-flex flex-column h-100 py-5 px-4">
-                                <div class="text-center text-muted mb-2">
-                                    <div class="pb-3">
-                                        <span class="logo-lg">
-                                            <img src="assets/images/logo-color-dark.png" alt="" height="110">
-                                        </span>
-                                    </div>
+                    <div class="col-xxl-3 col-lg-4 col-md-5">
+                        <div class="d-flex flex-column h-100 py-5 px-4">
+                            <div class="my-auto">
+                                <div class="p-3 text-center">
+                                    <img src="assets/images/logo-color-dark.png" alt="" class="img-fluid">
                                 </div>
                             </div>
-                        
+                        </div>                        
                         <!-- end auth full page content -->
                     </div>
                     <!-- end col -->

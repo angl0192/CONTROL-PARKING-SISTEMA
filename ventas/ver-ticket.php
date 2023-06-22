@@ -1,4 +1,20 @@
-﻿<html>
+﻿<?php
+require("../config/conexion.php");
+require("../config/inicializar-datos.php");
+date_default_timezone_set('America/Lima');
+$cod_parkeo = $_REQUEST['cod_parkeo'];
+$sqlParkeo = mysqli_query($conexion, "SELECT * FROM parkeo WHERE cod_parkeo = '$cod_parkeo'");
+$fparkeo = mysqli_fetch_array($sqlParkeo);
+$cod_parkeo = $fparkeo['cod_parkeo'];
+$cod_estacionamiento = $fparkeo['cod_estacionamiento'];
+$tipo_cliente = $fparkeo['tipo_cliente'];
+$num_placa = $fparkeo['num_placa'];
+$fecha_ingreso = $fparkeo['fecha_ingreso'];
+$hora_ingreso = $fparkeo['hora_ingreso'];
+$observacion = $fparkeo['observacion'];
+?>
+
+<html>
 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -26,33 +42,21 @@
 			<!-- ********************************************************** -->
 			<tr>
 				<td align="center">
-					<img src="imagenes/logo-ticket.png" alt="Logo Empresa" width="215" height="82">
+					<img src="imagenes/logo-ventas.png" alt="<?= $x_nombre_comercial ?>" width="150" height="57">
 				</td>
 			</tr>
 			<tr>
 				<td align="center">
-					<strong>RUC : 2563654877</strong><br>
-					Jr. Lima 123 La Molina<br>
-					Telefono : 999999999<br>
-					Email : email@gmail.com
+					<?= $x_razon_social?><br>
+					<strong>RUC : <?= $x_ruc ?></strong><br>
 				</td>
 			</tr>
 			<tr>
 				<td align="center">
 					<strong style="font-size: 16px; font-weight: 600;">
-						Tiket<br>
-						TK-0000001
+						Tiket TK-<?= $cod_parkeo?>
 					</strong>
 				</td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>
-			<tr>
-				<td>FECHA : 00-00-0000</td>
-			</tr>
-			<tr>
-				<td>FORMA PAGO : Contado</td>
 			</tr>
 			<tr>
 				<td></td>
@@ -66,38 +70,10 @@
 				<td colspan="4">==================================================</td>
 			</tr>
 			<tr>
-				<td>
-					<strong>
-						C.
-					</strong>
-				</td>
-				<td>
-					<strong>
-						DESCRIP.
-					</strong>
-				</td>
-				<td align="right">
-					<strong>
-						P. UNIT
-					</strong>
-				</td>
-				<td align="right">
-					<strong>
-						TOTAL
-					</strong>
+				<td colspan="4" align="center">
+					<img src="qr/<?=$num_placa. '-' .$fecha_ingreso. '-' .$hora_ingreso?>.png" alt="" width="150" height="150">
 				</td>
 			</tr>
-			<tr>
-				<td colspan="4">==================================================</td>
-			</tr>
-
-			<tr>
-				<td>1</td>
-				<td>Producto 1</td>
-				<td align="right">0.00</td>
-				<td align="right">0.00</td>
-			</tr>
-
 			<tr>
 				<td colspan="4">==================================================</td>
 			</tr>
@@ -105,48 +81,26 @@
 			<!-- ************* 	    PIE DE PAGINA DE TICKET     *********** -->
 			<!-- ********************************************************** -->
 			<tr>
-				<td colspan="3" align="right">SUB TOTAL :</td>
-				<td align="right">s/. 0.00</td>
+				<td colspan="2" align="left">PLACA :</td>
+				<td align="right"><?= $num_placa ?></td>
 			</tr>
 			<tr>
-				<td colspan="3" align="right">TOTAL GRABADAS :</td>
-				<td align="right">s/. 0.00</td>
+				<td colspan="2" align="left">FECHA INGRESO :</td>
+				<td align="right"><?= $fecha_ingreso ?></td>
 			</tr>
 			<tr>
-				<td colspan="3" align="right">IVG :</td>
-				<td align="right">s/. 0.00</td>
+				<td colspan="2" align="left">HORA INGRESO :</td>
+				<td align="right"><?= $hora_ingreso ?></td>
 			</tr>
 			<tr>
-				<td colspan="3" align="right">IMP. TOTAL :</td>
-				<td align="right">s/. 0.00</td>
+				<td colspan="2" align="left">OBSERVACIONES :</td>
+				<td align="right"><?= $observacion ?></td>
 			</tr>
-
 			<tr>
 				<td colspan="4">==================================================</td>
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
-					<?php
-					$V 		= new EnLetras();
-					$con_letra = strtoupper($V->ValorEnLetras($total_monto, "soles"));
-					echo "<strong>SON : " . $con_letra . '</strong>';
-					?>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4" align="center">
-					<img src="qr/qr.png" alt="" width="100" height="100">
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4" align="center">
-					Autorizado mediante Resolución de Intendencia Nº 032-005 Representacion impresa de la <?= $documento ?>.
-					Consulte su documento electrónico en htts://www.sunat.gob.pe
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4" align="center">
-					Nº de Articulos : <?= $suma ?>
 				</td>
 			</tr>
 			<tr>
@@ -154,7 +108,7 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
-					<strong>¡Gracias por su compra!</strong>
+					<strong>¡Gracias por su preferencia!</strong>
 				</td>
 			</tr>
 		</table>
